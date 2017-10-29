@@ -37,12 +37,6 @@ import static java.lang.System.out;
 
 public class Main {
 
-    // NON HO CAPITO BENE QUESTA SINTAssi, MA COMUNQUE I NOMI DELLE CLASSI SONO QUESTI (SPERO)
-    // com/android|android|com/google|javax?|dalvik|org/apache
-    private static String  identificativiChiamateASistema [] = {"com/android","com/google","dalvik","org/apache"};
-    public static int  nRedirected = 0;
-    public static int nRemoved = 0;
-    public int nNotRedirected = 0;
 
 
     public static void main(String [] args) throws IOException {
@@ -110,59 +104,22 @@ public class Main {
         MutableMethodImplementation newImplementation = null;
         int i = -1;
         for (Instruction instruction : origImplementation.getInstructions()) {
-            System.out.println(instruction.getOpcode().name);
-            ++i;
-            if (instruction.getOpcode() == Opcode.INVOKE_VIRTUAL) {
-                //System.out.println("GG");
-                //System.out.println(instruction);
-                Instruction35c i35c = (Instruction35c) instruction;
 
-                String metodoConRispettivaClasse = ((Instruction35c) instruction).getReference().toString();
-                for (String path: identificativiChiamateASistema) {
-
-                    if (metodoConRispettivaClasse.contains(path))
-                    {
-                        //out.println("CHIAMATA A SISTEMA ->" + metodoConRispettivaClasse);
-
-
-                    }else
-                    {
-                        //out.println("NON CHIAMATA A SISTEMA->" + metodoConRispettivaClasse);
-                    }
-
-                }
+            System.out.println(instruction.getOpcode().name + " " + instruction.getOpcode().flags );
+            // Controllo che instruction.getOpcode().flags sia uno di quelli che sono scritti qui sotto, Corretto ?
 
 
 
 
+            /*
+            * SOlo le istruzioni con lo xor sono quelle che prendo:
+            * Istruzione->xor-long/2addr  opCode->52
+            * Istruzione->xor-int/lit8 opCode-> 20
+            *
+            * Da intenet sul sito di android ho questo:
+            * 97: xor-int
+            * */
 
-
-                /*
-                * Qui secondo me basta controllare il package di appartenenza e capisco se è
-                * uno fra quelli li allora è una è molto probabile sia una chiamata a sistema
-                * private static final Pattern validApiClass = Pattern.compile("^L(com/android|android|com/google|javax?|dalvik|org/apache)/.*$");
-                *
-                * */
-
-
-
-
-
-
-                // /Instruction35c newInstruction = checkInstruction(i35c);
-                Instruction35c newInstruction = i35c;
-                if (newInstruction == i35c)
-                    continue;
-                if (newImplementation == null) // trick for memory saving
-                    newImplementation = new MutableMethodImplementation(origImplementation);
-                if (newInstruction == null) {
-                    ++nRemoved;
-                    newImplementation.removeInstruction(i--);
-                    continue;
-                }
-                ++nRedirected;
-                newImplementation.replaceInstruction(i, (BuilderInstruction35c)newInstruction);
-            }
         }
         return newImplementation!=null ? newImplementation : origImplementation;
     }
