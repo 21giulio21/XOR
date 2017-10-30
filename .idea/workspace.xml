@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1e594d2f-47dc-4dcb-af0d-8b9f96b5ac1a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -24,10 +25,10 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="602">
-              <caret line="72" column="40" lean-forward="false" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
+            <state relative-caret-position="458">
+              <caret line="60" column="89" lean-forward="false" selection-start-line="60" selection-start-column="89" selection-end-line="60" selection-end-column="89" />
               <folding>
-                <element signature="e#0#3195#0" expanded="true" />
+                <element signature="e#0#3693#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -634,7 +635,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508861857341</updated>
-      <workItem from="1509358036615" duration="2753000" />
+      <workItem from="1509358036615" duration="3310000" />
     </task>
     <task id="LOCAL-00001" summary="upd1">
       <created>1509361151234</created>
@@ -643,11 +644,18 @@
       <option name="project" value="LOCAL" />
       <updated>1509361151234</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="upd1">
+      <created>1509361188908</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1509361188908</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2753000" />
+    <option name="totallyTimeSpent" value="3310000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="-4" width="1981" height="1156" extended-state="6" />
@@ -703,7 +711,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -730,7 +738,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -757,7 +765,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -784,7 +792,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -811,7 +819,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -838,7 +846,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -865,7 +873,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -892,7 +900,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -980,10 +988,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="72" column="40" lean-forward="false" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
+        <state relative-caret-position="458">
+          <caret line="60" column="89" lean-forward="false" selection-start-line="60" selection-start-column="89" selection-end-line="60" selection-end-column="89" />
           <folding>
-            <element signature="e#0#3195#0" expanded="true" />
+            <element signature="e#0#3693#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>

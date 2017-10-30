@@ -45,11 +45,24 @@ public class Main {
 
         File inputFile = new File("/home/giuliofisso/Scrivania/WhatsApp/classes.dex");
         List<Path> apksInFolder = getAllFiles(new ArrayList<>(), inputFile.toPath());
-        analyse(inputFile);
+        int total = apksInFolder.size();
+        int useXor = 0;
+        int ex = 0;
+
+        for (Path path : apksInFolder) {
+            try {
+                if (analyse(path.toFile())) {
+                    useXor++;
+                }
+            } catch (Exception e) {
+                ex++;
+            }
+        }
+        System.out.println(String.format("tot=%d, useXor=%d, ex=%d", total, useXor, ex));
     }
 
 
-    private static void analyse(File inputFile) throws IOException {
+    private static boolean analyse(File inputFile) throws IOException {
         System.out.println(inputFile.getName());
         DexFile dexFile = DexFileFactory.loadDexFile(inputFile, Opcodes.forApi(22));
         for (ClassDef classDef : dexFile.getClasses()) {
@@ -66,6 +79,7 @@ public class Main {
                         case XOR_LONG:
                         case XOR_LONG_2ADDR:
                         case XOR_INT_LIT16:
+                            return true; // FIXME
                             break;
                         default:
                             continue;
@@ -92,7 +106,8 @@ public class Main {
                 if (path.toFile().isDirectory()) {
                     getAllFiles(fileNames, path);
                 } else {
-                    fileNames.add(path);
+                    if (path.toString().endsWith(".apk"))
+                        fileNames.add(path);
                 }
             }
         } catch (IOException e) {
