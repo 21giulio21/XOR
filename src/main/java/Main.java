@@ -43,13 +43,15 @@ public class Main {
 
     public static void main(String [] args) throws IOException {
 
-        File inputFile = new File("/home/giuliofisso/Scrivania/WhatsApp/classes.dex");
+        File inputFile = new File("/media/simo/B6CAE475CAE43373/GOODWARE");
         List<Path> apksInFolder = getAllFiles(new ArrayList<>(), inputFile.toPath());
         int total = apksInFolder.size();
         int useXor = 0;
         int ex = 0;
+        int i = 0;
 
         for (Path path : apksInFolder) {
+            System.out.println(String.format("%d / %d", ++i, total));
             try {
                 if (analyse(path.toFile())) {
                     useXor++;
@@ -63,7 +65,7 @@ public class Main {
 
 
     private static boolean analyse(File inputFile) throws IOException {
-        System.out.println(inputFile.getName());
+        //System.out.println(inputFile.getName());
         DexFile dexFile = DexFileFactory.loadDexFile(inputFile, Opcodes.forApi(22));
         for (ClassDef classDef : dexFile.getClasses()) {
             for (Method method : classDef.getMethods()) {
@@ -76,20 +78,20 @@ public class Main {
                         case XOR_INT:
                         case XOR_INT_2ADDR:
                         case XOR_INT_LIT8:
+                        case XOR_INT_LIT16:
                         case XOR_LONG:
                         case XOR_LONG_2ADDR:
-                        case XOR_INT_LIT16:
-                            return true; // FIXME
-                            break;
+                            return true; // TODO
+                            //break;
                         default:
                             continue;
                     }
-                    String defAndMeth = method.getDefiningClass() + "->" + method.getName();
+                    //String defAndMeth = method.getDefiningClass() + "->" + method.getName();
                 }
             }
 
-
         }
+        return false;
     }
 
     /*
