@@ -27,6 +27,9 @@ import org.jf.dexlib2.immutable.ImmutableMethod;
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,91 +41,63 @@ import static java.lang.System.out;
 public class Main {
 
 
-
     public static void main(String [] args) throws IOException {
-        File inputFile = new File("/home/giuliofisso/Scrivania/WhatsApp/classes.dex");
 
+        File inputFile = new File("/home/giuliofisso/Scrivania/WhatsApp/classes.dex");
+        List<Path> apksInFolder = getAllFiles(new ArrayList<>(), inputFile.toPath());
+        analyse(inputFile);
+    }
+
+
+    private static void analyse(File inputFile) throws IOException {
+        System.out.println(inputFile.getName());
         DexFile dexFile = DexFileFactory.loadDexFile(inputFile, Opcodes.forApi(22));
         for (ClassDef classDef : dexFile.getClasses()) {
-            ClassDef d = customizeClass(classDef);
+            for (Method method : classDef.getMethods()) {
+                MethodImplementation implementation = method.getImplementation();
+                if (implementation == null) {
+                    continue;
+                }
+                for (Instruction instruction : implementation.getInstructions()) {
+                    switch (instruction.getOpcode()) {
+                        case XOR_INT:
+                        case XOR_INT_2ADDR:
+                        case XOR_INT_LIT8:
+                        case XOR_LONG:
+                        case XOR_LONG_2ADDR:
+                        case XOR_INT_LIT16:
+                            break;
+                        default:
+                            continue;
+                    }
+                    String defAndMeth = method.getDefiningClass() + "->" + method.getName();
+                }
+            }
 
 
         }
     }
-
-    private static ClassDef customizeClass(ClassDef classDef) {
-        List<Method> methods = new ArrayList<>();
-        boolean modifiedMethod = false;
-        for (Method method : classDef.getMethods()) {
-            //out.println("DIO->" + method.getName());
-            MethodImplementation implementation = method.getImplementation();
-            if (implementation == null) {
-                //out.println("METODO1 : " + method.getName());
-                methods.add(method);
-                continue;
-            }
-            MethodImplementation customImpl = searchAndReplaceInvocations(implementation);
-            if (customImpl==implementation) {
-                //out.println("METODO2 : " + method.getName());
-
-                methods.add(method);
-                continue;
-            }
-            modifiedMethod = true;
-            final ImmutableMethod newMethod = new ImmutableMethod(method.getDefiningClass(),
-                    method.getName(),
-                    method.getParameters(),
-                    method.getReturnType(),
-                    method.getAccessFlags(),
-                    method.getAnnotations(),
-                    customImpl);
-            //out.println("METODO3 : " + newMethod.getName());
-
-            methods.add(newMethod);
-        }
-        if (!modifiedMethod)
-            return classDef;
-        return new ImmutableClassDef(classDef.getType(),
-                classDef.getAccessFlags(),
-                classDef.getSuperclass(),
-                classDef.getInterfaces(),
-                classDef.getSourceFile(),
-                classDef.getAnnotations(),
-                classDef.getFields(),
-                methods);
-    }
-
 
     /*
-    * Questa funzione prende tutti metodi utilizzati e controllo se sono
-    * chiamate a sistema, se sono chiamate a sistema allora appartengono a questa classe
-    * com/android|android|com/google|javax?|dalvik|org/apache
-    *
-    * */
-
-    private static MethodImplementation searchAndReplaceInvocations(MethodImplementation origImplementation) {
-        MutableMethodImplementation newImplementation = null;
-        int i = -1;
-        for (Instruction instruction : origImplementation.getInstructions()) {
-
-            System.out.println(instruction.getOpcode().name + " " + instruction.getOpcode().flags );
-            // Controllo che instruction.getOpcode().flags sia uno di quelli che sono scritti qui sotto, Corretto ?
-
-
-
-
-            /*
-            * SOlo le istruzioni con lo xor sono quelle che prendo:
-            * Istruzione->xor-long/2addr  opCode->52
-            * Istruzione->xor-int/lit8 opCode-> 20
-            *
-            * Da intenet sul sito di android ho questo:
-            * 97: xor-int
-            * */
-
-        }
-        return newImplementation!=null ? newImplementation : origImplementation;
+    {
+        "nomeapp" : { "defclass->meth" : "xor-int", },
+        "nomeapp2" : { },
     }
 
+     */
 
+    private static List<Path> getAllFiles(List<Path> fileNames, Path dir) {
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+            for (Path path : stream) {
+                if (path.toFile().isDirectory()) {
+                    getAllFiles(fileNames, path);
+                } else {
+                    fileNames.add(path);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileNames;
+    }
 }
